@@ -1,0 +1,190 @@
+* {
+  margin: 0; padding: 0;
+  border: none; outline: none;
+}
+body {
+  user-select: none;
+  /*Pallete*/
+  --link: rgb(212, 184, 131);
+  --link-dark: rgb(207, 182, 134);
+  --main: rgb(222, 222, 222);
+  --main-dark: rgb(190, 188, 188);
+		--mainfont: Arial, Helvetica, sans-serif;
+  /*Body*/
+  background: var(--main);
+  font-family: var(--mainfont);  
+  padding: 0px 0px; height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center;
+  /*Scroll Bar*/
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+body > * {
+ width: 100%;
+}
+button:hover, .movie-clickable:hover {
+ cursor: pointer;
+}
+button[disabled] {
+ cursor: not-allowed;
+}
+/*Contact*/
+.bg {
+  background: var(--link-dark);
+  width: 280px; height: 100px;
+  
+  position: fixed; z-index: -1;
+  bottom: 10px; right: 10px; 
+  padding: 10px;
+}
+.contact {
+  width: 280px; height: 100px;
+  position: absolute;
+  right: 15px; bottom: 15px;
+  background: var(--main);
+  padding: 10px;
+  border: 1px solid var(--main-dark);
+}
+p.ttl {
+  font-size: 1.5rem; font-weight: bold;
+  margin-bottom: 5px;
+}
+.contact p:not(.ttl) a {
+  color: var(--link);
+}
+.contact p:not(.ttl) {
+  font-size: 1.2rem;
+}
+/*Header*/
+header {
+ display: flex;
+ padding: 15px 0px;
+ font-variant: small-caps;
+ font-weight: bold;
+}
+@media (orientation: landscape) {
+  header {
+    justify-content: end;
+			gap:40px;
+      padding-right: 20px;
+  }
+}
+@media (orientation: portrait) {
+  header {
+    justify-content: center;
+    gap: 80px;
+  }
+}
+header p:hover {
+ cursor: pointer; color: var(--link);
+}
+
+/*Page Container*/
+.pages {
+  height: 100%;
+}
+
+/*Portfolio*/
+.japper {
+	font-family: var(--mainfont);
+	font-size: 1.2rem;
+	margin-bottom: 30px;
+  margin-top: 40px
+}
+.portfolio {
+  padding: 0 30px;
+}
+.portfoliosec {
+  display: grid; gap: 20px;
+}
+@media (orientation: landscape) {
+  .portfoliosec {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+@media (orientation: portrait) {
+  .monthdisplay, .yeardisplay {
+    justify-content: center;
+    padding-bottom: 10px;
+  }
+}
+.tmln { /*TIME BTN*/
+  background: rgb(207, 207, 207);
+  width: 20px; height: 30px;
+  border: none; border-radius: 8px;
+}
+
+/*Video Section*/
+.yeardisplay {
+  display: flex;
+  align-items: center;
+}
+.yeardisplay p {
+  font-size: 3rem;
+  margin-inline: 8px;
+}
+.reel {
+  background-color: black;
+  width: 100%; aspect-ratio: 16 / 9;
+  position: relative; z-index: 0;
+}
+
+/*Text Section*/
+.monthdisplay {
+  display: flex;
+  align-items: center;
+}
+.monthdisplay p {
+  font-size: 2.5rem;
+  margin-inline: 8px;
+}
+.yrtroph {
+  display: block;
+}
+.achv {
+  list-style-type: disc;
+  list-style-position: inside;
+  padding-left: 5px;
+  padding-top: 10px;
+	font-size: 1.2rem;
+}
+@media (orientation: portrait){
+	.achv {
+		display: grid;
+		grid-template-columns: auto auto;
+	}
+}
+/*Client*/
+.client{
+  display: none;
+}
+
+/*Entertainment*/
+.entertainment {
+  display: none;
+}
+.seriesbox {
+  padding: 20px
+}
+.tvtitle {
+  font-weight: bold;
+  font-size: 2rem;
+}
+.movie-section {
+  margin-bottom: 30px;
+}
+.listofshows {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.movie-clickable {
+ width: 300px; aspect-ratio: 16 / 9;
+ height: auto;
+ background: black;
+}
