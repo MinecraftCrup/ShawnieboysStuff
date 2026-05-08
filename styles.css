@@ -1,21 +1,32 @@
+/*
+- Add feedback feautre
+*/ 
+
 * {
   margin: 0; padding: 0;
   border: none; outline: none;
 }
+html {
+  scrollbar-width: none;
+}
 body {
   user-select: none;
+
   /*Pallete*/
-  --link: rgb(212, 184, 131);
-  --link-dark: rgb(207, 182, 134);
-  --main: rgb(222, 222, 222);
-  --main-dark: rgb(190, 188, 188);
-		--mainfont: Arial, Helvetica, sans-serif;
+  --hyperlink-color-light: rgb(212, 184, 131);
+  --hyperlink-color-dark: rgb(207, 182, 134);
+  --bg-color-white: rgb(222, 222, 222);
+  --bg-color-gray: rgb(190, 188, 188);
+  --bg-color-black: rgb(26, 26, 26);
+	--main-font: Arial, Helvetica, sans-serif;
+
   /*Body*/
-  background: var(--main);
-  font-family: var(--mainfont);  
+  background: var(--bg-color-white);
+  font-family: var(--main-font);
   padding: 0px 0px; height: 100vh;
   display: flex; flex-direction: column;
   align-items: center;
+
   /*Scroll Bar*/
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
@@ -32,31 +43,38 @@ button:hover, .movie-clickable:hover {
 button[disabled] {
  cursor: not-allowed;
 }
+
 /*Contact*/
-.bg {
-  background: var(--link-dark);
-  width: 280px; height: 100px;
-  position: fixed;
-  bottom: 10px; right: 10px; 
-  padding: 10px;
-}
-.contact {
-  width: 280px; height: 100px;
+.contact-box {
+  width: 280px;
+
   position: fixed;
   right: 15px; bottom: 15px;
-  background: var(--main);
-  padding: 10px;
-  border: 1px solid var(--main-dark);
+
+  background: var(--bg-color-white);
+  border: 1px solid var(--bg-color-gray);
+  box-shadow: var(--hyperlink-color-dark) 5px 5px;
+  
+  display: flex; flex-direction: column;
 }
-p.ttl {
+.main-contact-box {
+  padding: 10px;
+}
+p.title {
   font-size: 1.5rem; font-weight: bold;
   margin-bottom: 5px;
 }
-.contact p:not(.ttl) a {
-  color: var(--link);
+.contact-box p:not(.ttl) a {
+  color: var(--hyperlink-color-dark);
 }
-.contact p:not(.ttl) {
+.contact-box p:not(.ttl) {
   font-size: 1.2rem;
+}
+.hide-contact-box-right {
+  border-left: 1px solid var(--bg-color-gray);
+}
+.hide-contact-box-down {
+  border-top: 1px solid var(--bg-color-gray);
 }
 /*Header*/
 header {
@@ -64,6 +82,7 @@ header {
  padding: 15px 0px;
  font-variant: small-caps;
  font-weight: bold;
+ background: var(--main);
 }
 @media (orientation: landscape) {
   header {
@@ -79,17 +98,19 @@ header {
   }
 }
 header p:hover {
- cursor: pointer; color: var(--link);
+ cursor: pointer; color: var(--hyperlink-color-light);
 }
-
+#client:hover{
+  cursor: not-allowed;
+}
 /*Page Container*/
 .pages {
   height: 100%;
 }
 
 /*Portfolio*/
-.japper {
-	font-family: var(--mainfont);
+.portfoliopage-aboutme {
+	font-family: var(--main-font);
 	font-size: 1.2rem;
 	margin-bottom: 30px;
   margin-top: 40px
@@ -181,6 +202,8 @@ header p:hover {
   display: flex;
   flex-direction: row;
   gap: 20px;
+  overflow-x: scroll;
+  scrollbar-width: none;
 }
 .movie-clickable {
  width: 300px; aspect-ratio: 16 / 9;

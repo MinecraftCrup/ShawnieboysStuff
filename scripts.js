@@ -1,25 +1,16 @@
-// Navigation Bar
-var portfolio = document.getElementById("portfolio");
-var client = document.getElementById("client");
-var entertainment = document.getElementById("tainment");
-
 function clearPage() {
   document.getElementsByClassName("client")[0].style.display = "none"
   document.getElementsByClassName("portfolio")[0].style.display = "none"
   document.getElementsByClassName("entertainment")[0].style.display = "none"
 }
 
+// Portfolio Page
+var portfolio = document.getElementById("portfolio");
 portfolio.addEventListener("click", function showPortfolio(){
   clearPage();
   document.getElementsByClassName("portfolio")[0].style.display = "block"
 })
-client.addEventListener("click", function showClient(){
-  clearPage();
-  document.getElementsByClassName("client")[0].style.display = "block"
-})
 
-
-// Portfolio Page
 var yr = 2026; // This is the year that is featured first.
 const goodyrs = [2026,];
 
@@ -122,39 +113,26 @@ Backward2.addEventListener("click", function (){
   displaymon("-"); checkbtn2();
 });
 
+// Client Page
+var client = document.getElementById("client");
+/*
+client.addEventListener("click", function showClient(){
+  clearPage();
+  document.getElementsByClassName("client")[0].style.display = "block"
+})
+*/
+
+
 // Entertaintment Page
+var entertainment = document.getElementById("entertainment");
+
 entertainment.addEventListener("click", function showEntertainment(){
   clearPage();
   
   // Display the Entertainment Section
-  document.getElementsByTagName("body")[0].style.paddingInline = 0
+  document.getElementsByTagName("body")[0].style.paddingInline = 0;
   document.getElementsByClassName("entertainment")[0].style.display = "block";
-  displayFeaturedFilms();
-  
 })
-
-function displayFeaturedFilms() {
-  var current_priority; current_priority = 1;
-  var movies; movies = Object.keys(movie_box);
-  
-  current_priority = 1;
-  while (current_priority < (movies["length"] + 1)) {
-    movies.forEach(check);
-    current_priority ++;
-  }
-
-  function check (movie) {
-    console.log(movie_box[movie]["priority"]);
-    if (movie_box[movie]["priority"] === current_priority) {
-      var movie_clickable;
-      movie_clickable = 
-      "<div>" +
-        `<img class="movie-clickable" title="` + movie_box[movie]["title"] + `" src="images/ + movie_box[movie]["thumbnail"] + ">` +
-      "<div>";
-      document.getElementsByClassName("listofshows")[0].innerHTML += movie_clickable;
-    };
-  }
-}
 
 var movie_box = {
   "Crup's Adventure": {
@@ -191,3 +169,27 @@ var movie_box = {
     },
 }
 
+displayFeaturedFilms();
+
+function displayFeaturedFilms() {
+  var current_priority; current_priority = 1;
+  var movies; movies = Object.keys(movie_box);
+  
+  current_priority = 1;
+  while (current_priority < (movies["length"] + 1)) {
+    movies.forEach(check);
+    current_priority ++;
+  }
+
+  function check (movie) {
+    console.log(movie_box[movie]["priority"]);
+    if (movie_box[movie]["priority"] === current_priority) {
+      var movie_clickable;
+      movie_clickable = 
+      "<div>" +
+        `<img class="movie-clickable" title="` + movie_box[movie]["title"] + `" src="images/ + movie_box[movie]["thumbnail"] + ">` +
+      "<div>";
+      document.getElementsByClassName("listofshows")[0].innerHTML += movie_clickable;
+    };
+  }
+}
