@@ -21,7 +21,7 @@ client.addEventListener("click", function showClient(){
 
 // Portfolio Page
 var yr = 2026; // This is the year that is featured first.
-const goodyrs = [2026, 2027];
+const goodyrs = [2026,];
 
 function checkbtn() {
   if (goodyrs.indexOf(yr) == 0) { // w/ other words if it the last or first item
@@ -67,22 +67,9 @@ Forward.addEventListener("click", function forward(){
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const stuff = {
   2026:{
-    1:["Released KNOCK OFF", "Got 1M","ssssssssssssssssssssss", "s"],
-    4:["Jumped", "Got a gf",],
-    videoid:"oBEuI9lUlMg",
+    1:["Made this Website", ],
+    videoid:"",
   },
-  
-  2027:{
-    5:[
-      "",
-      "",
-    ],
-    3:[
-      "",
-      "",
-    ],
-    videoid:""
-  }, 
 }
 
 var shownmon = 0;
