@@ -125,15 +125,15 @@ client.addEventListener("click", function showClient(){
 
 // Entertaintment Page
 var entertainment = document.getElementById("entertainment");
-
+/*
 entertainment.addEventListener("click", function showEntertainment(){
   clearPage();
-  
+
   // Display the Entertainment Section
   document.getElementsByTagName("body")[0].style.paddingInline = 0;
   document.getElementsByClassName("entertainment")[0].style.display = "block";
 })
-
+*/
 var movie_box = {
   "Crup's Adventure": {
     "title":"Crup's Adventure",
