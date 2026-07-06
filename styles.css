@@ -100,7 +100,7 @@ header {
 header p:hover {
  cursor: pointer; color: var(--hyperlink-color-light);
 }
-#client:hover, #entertainment:hover{
+#client:hover{
   cursor: not-allowed;
 }
 /*Page Container*/

@@ -3,7 +3,12 @@ function clearPage() {
   document.getElementsByClassName("portfolio")[0].style.display = "none"
   document.getElementsByClassName("entertainment")[0].style.display = "none"
 }
-
+var onGitHub;
+if (window.location.href === 'https://minecraftcrup.github.io/ShawnieboysStuff/') {
+  onGitHub = true;
+} else {
+  onGitHub = false; 
+}
 // Portfolio Page
 var portfolio = document.getElementById("portfolio");
 portfolio.addEventListener("click", function showPortfolio(){
@@ -58,7 +63,7 @@ Forward.addEventListener("click", function forward(){
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const stuff = {
   2026:{
-    1:["Made this Website", ],
+    1:["Made this Website...", ],
     videoid:"",
   },
 }
@@ -115,25 +120,27 @@ Backward2.addEventListener("click", function (){
 
 // Client Page
 var client = document.getElementById("client");
-/*
-client.addEventListener("click", function showClient(){
-  clearPage();
-  document.getElementsByClassName("client")[0].style.display = "block"
-})
-*/
-
+if (onGitHub === false) {
+  client.addEventListener("click", function showClient(){
+    clearPage();
+    document.getElementsByClassName("client")[0].style.display = "block"
+  })
+}
 
 // Entertaintment Page
 var entertainment = document.getElementById("entertainment");
-/*
-entertainment.addEventListener("click", function showEntertainment(){
-  clearPage();
 
-  // Display the Entertainment Section
-  document.getElementsByTagName("body")[0].style.paddingInline = 0;
-  document.getElementsByClassName("entertainment")[0].style.display = "block";
-})
-*/
+if (onGitHub === false) {
+  entertainment.addEventListener("click", function showEntertainment(){
+    clearPage();
+  
+    // Display the Entertainment Section
+    document.getElementsByTagName("body")[0].style.paddingInline = 0;
+    document.getElementsByClassName("entertainment")[0].style.display = "block";
+    window.document.querySelector("");
+  })
+}
+
 var movie_box = {
   "Crup's Adventure": {
     "title":"Crup's Adventure",
