@@ -9,21 +9,34 @@ if (window.location.href === 'https://minecraftcrup.github.io/ShawnieboysStuff/'
 } else {
   onGitHub = false; 
 }
-
-var orientation = window.screen.orientation.type;
+var contactBox = window.document.querySelector(".contact-box");
+var orientation = window.screen.orientation;
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
+var header = window.document.querySelector("header");
 
 function func() {
-  if (windowWidth <= 560) {
-    window.document.querySelector("header").style.gap = "0px";
-    window.document.querySelector("header").style.justifyContent = "space-evenly";
-  }
+  if (orientation == 90) {
+    header.style.justifyContent = "end";
+  } 
   else {
-    window.document.querySelector("header").style.gap = "80px";
-    window.document.querySelector("header").style.justifyContent = "center";
+    if (windowWidth <= 540) {
+      header.style.gap = "0px";
+      header.style.justifyContent = "space-evenly";
+    }
+    if (windowWidth >= 540) {
+      header.style.gap = "80px";
+      header.style.justifyContent = "center";
+      showContactBox();
+    }
+  }
+  if (windowWidth <= 670) {
+    contactBox.style.right = "0px";
+    contactBox.style.left = [(windowWidth - 290)/2, "px"].join("");
   }
 }
+
+
 func();
 window.addEventListener("resize", function() {
   windowWidth = window.innerWidth;
@@ -32,10 +45,15 @@ window.addEventListener("resize", function() {
 });
 // Contact Box
 var hideRight = window.document.querySelector(".hide-contact-box-right");
-var contactBox = window.document.querySelector(".contact-box");
+var hideDown = window.document.querySelector(".hide-contact-box-down");
+var showUp = window.document.querySelector(".show-contact-box-up");
 var mainContactBox = window.document.querySelector(".main-contact-box");
 var hideContactBox;
 
+function showContactBox() {
+  contactBox.style.display = "block";
+  showUp.style.display = "none";
+}
 hideRight.addEventListener("click", function hideContactBoxRight() {
   if (hideContactBox === true) {
     hideContactBox = false;
@@ -48,12 +66,26 @@ hideRight.addEventListener("click", function hideContactBoxRight() {
     mainContactBox.style.display = "none";
   }
 })
-// Portfolio Page
-var portfolio = document.getElementById("portfolio");
-portfolio.addEventListener("click", function showPortfolio(){
-  clearPage();
-  document.getElementsByClassName("portfolio")[0].style.display = "block"
+hideDown.addEventListener("click", function hideContactBoxDown() {
+  if (hideContactBox === true) {
+    hideContactBox = false;;
+    ContactBox.style.display = "block";
+    showUp.style.display = "none";
+  }
+  else {
+    hideContactBox = true;
+    contactBox.style.right = "10px";
+    contactBox.style.display = "none";
+    showUp.style.display = "flex";
+  }
 })
+showUp.addEventListener("click", function showContactBoxUp() {
+  if (hideContactBox === true) {
+    hideContactBox = false;
+    contactBox.style.display = "block";
+    showUp.style.display = "none";
+  }
+});
 
 var yr = 2026; // This is the year that is featured first.
 const goodyrs = [2026,];
