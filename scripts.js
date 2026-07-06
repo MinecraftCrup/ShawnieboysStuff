@@ -9,6 +9,45 @@ if (window.location.href === 'https://minecraftcrup.github.io/ShawnieboysStuff/'
 } else {
   onGitHub = false; 
 }
+
+var orientation = window.screen.orientation.type;
+var windowWidth = window.innerWidth;
+var windowHeight = window.innerHeight;
+
+function func() {
+  if (windowWidth <= 560) {
+    window.document.querySelector("header").style.gap = "0px";
+    window.document.querySelector("header").style.justifyContent = "space-evenly";
+  }
+  else {
+    window.document.querySelector("header").style.gap = "80px";
+    window.document.querySelector("header").style.justifyContent = "center";
+  }
+}
+func();
+window.addEventListener("resize", function() {
+  windowWidth = window.innerWidth;
+  windowHeight = window.innerHeight; 
+ func()
+});
+// Contact Box
+var hideRight = window.document.querySelector(".hide-contact-box-right");
+var contactBox = window.document.querySelector(".contact-box");
+var mainContactBox = window.document.querySelector(".main-contact-box");
+var hideContactBox;
+
+hideRight.addEventListener("click", function hideContactBoxRight() {
+  if (hideContactBox === true) {
+    hideContactBox = false;
+    contactBox.style.right = "15px";    
+    mainContactBox.style.display = "block";
+  }
+  else {
+    hideContactBox = true;
+    contactBox.style.right = "10px";
+    mainContactBox.style.display = "none";
+  }
+})
 // Portfolio Page
 var portfolio = document.getElementById("portfolio");
 portfolio.addEventListener("click", function showPortfolio(){
@@ -63,12 +102,14 @@ Forward.addEventListener("click", function forward(){
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const stuff = {
   2026:{
-    1:["Made this Website...", ],
+    1:[" 😅 Made this Website...", ],
     videoid:"",
   },
 }
 
 var shownmon = 0;
+
+displaymon();
 function displaymon(hmm) {
   if (hmm == "+") {
     shownmon++;
@@ -91,11 +132,10 @@ function displaymon(hmm) {
   }
 }
 
-displaymon();
-
 var Backward2 = document.getElementById("←2");
 var Forward2 = document.getElementById("→2");
 
+checkbtn2();
 function checkbtn2 (){
   if (shownmon == 0) {
     Backward2.setAttribute("disabled","");
@@ -108,8 +148,6 @@ function checkbtn2 (){
     Forward2.removeAttribute("disabled")
   };
 }
-
-checkbtn2();
 
 Forward2.addEventListener("click", function (){
   displaymon("+"); checkbtn2();
@@ -177,7 +215,6 @@ var movie_box = {
 }
 
 displayFeaturedFilms();
-
 function displayFeaturedFilms() {
   var current_priority; current_priority = 1;
   var movies; movies = Object.keys(movie_box);
@@ -194,7 +231,7 @@ function displayFeaturedFilms() {
       var movie_clickable;
       movie_clickable = 
       "<div>" +
-        `<img class="movie-clickable" title="` + movie_box[movie]["title"] + `" src="images/ + movie_box[movie]["thumbnail"] + ">` +
+        `<img class="movie-clickable btn" title="` + movie_box[movie]["title"] + `" src="images/ + movie_box[movie]["thumbnail"] + ">` +
       "<div>";
       document.getElementsByClassName("listofshows")[0].innerHTML += movie_clickable;
     };
