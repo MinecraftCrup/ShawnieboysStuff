@@ -121,10 +121,12 @@ window.addEventListener("resize", function() {
         achievmentYears[index] = +year;
       });
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
     // Functionalities
       var previousYearButton = select("#←");
       var nextYearButton = select("#→");
-      function checkbtn() {
+
+      function updateYearButtons() {
         if (achievmentYears.indexOf(featuredYear) == 0) { // w/ other words if it the last or first item
           previousYearButton.setAttribute("disabled","");
         } else {
@@ -136,14 +138,15 @@ window.addEventListener("resize", function() {
           nextYearButton.removeAttribute("disabled");
         }
       }
+
       function displayYear(action) {
         if (action == "+") {
           featuredYear++;
-          checkbtn();
+          updateYearButtons();
         }
         if (action == "-") {
           featuredYear--;
-          checkbtn();
+          updateYearButtons();
         }
         select("#yr").innerHTML = featuredYear;
   
@@ -154,15 +157,20 @@ window.addEventListener("resize", function() {
         }
         catch (e) {};
       }
-      checkbtn();
+
+      updateYearButtons();
       displayYear();
+
       previousYearButton.addEventListener("click", function forward(){
         displayYear("-"); 
       });
+
       nextYearButton.addEventListener("click", function forward(){
         displayYear("+");  
       });
+
       var displayedMonth = 0;
+
       displayMonth();
       function displayMonth(action) {
         if (action == "+") {
@@ -182,33 +190,37 @@ window.addEventListener("resize", function() {
         achievmentList += '</ul>'
         select(".achievmentListContainer").innerHTML = achievmentList;
       }
-    var Backward2 = select("#←2");
-    var Forward2 = select("#→2");
-    checkbtn2();
-    function checkbtn2 (){
-      if (displayedMonth == 0) {
-        Backward2.setAttribute("disabled","");
-      } else {
-        Backward2.removeAttribute("disabled");
-      };
-      if (displayedMonth == Object.keys(achievments[featuredYear]).length - 2) {
-        Forward2.setAttribute("disabled","")
-      } else {
-        Forward2.removeAttribute("disabled")
-      };
-    }
-  Forward2.addEventListener("click", function (){
-  displayMonth("+"); checkbtn2();
-  });
-  Backward2.addEventListener("click", function (){
-  displayMonth("-"); checkbtn2();
-  });
 
-  var achievmentsHeaderButton = document.getElementById("portfolio");
-  achievmentsHeaderButton.addEventListener("click", function showPortfolio(){
-    clearThePage();
-    select("#portfolio")[0].style.display = "block"
-  })
+      var previousMonthButton = select("#←2");
+      var nextMonthButton = select("#→2");
+
+      updateMonthButtons();
+      function updateMonthButtons (){
+        if (displayedMonth == 0) {
+          previousMonthButton.setAttribute("disabled","");
+        }
+        else {
+          previousMonthButton.removeAttribute("disabled");
+        }
+        if (displayedMonth == Object.keys(achievments[featuredYear]).length - 2) {
+        nextMonthButton.setAttribute("disabled","")
+        } 
+        else {
+          nextMonthButton.removeAttribute("disabled")
+        };
+      }
+      nextMonthButton.addEventListener("click", function (){
+      displayMonth("+"); updateMonthButtons();
+      });
+      previousMonthButton.addEventListener("click", function (){
+      displayMonth("-"); updateMonthButtons();
+      });
+
+      var achievmentsHeaderButton = document.getElementById("portfolio");
+      achievmentsHeaderButton.addEventListener("click", function showPortfolio(){
+      clearThePage();
+      select("#portfolio")[0].style.display = "block"
+      })
 
 // Client Page
   var client = document.getElementById("client");
