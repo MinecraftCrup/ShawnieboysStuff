@@ -1,217 +1,237 @@
-function clearPage() {
-  document.getElementsByClassName("client")[0].style.display = "none"
-  document.getElementsByClassName("portfolio")[0].style.display = "none"
-  document.getElementsByClassName("entertainment")[0].style.display = "none"
+function select(element) {
+  return document.querySelector(element);
 }
-var onGitHub;
-if (window.location.href === 'https://minecraftcrup.github.io/ShawnieboysStuff/') {
-  onGitHub = true;
-} else {
-  onGitHub = false; 
-}
-var contactBox = window.document.querySelector(".contact-box");
-var orientation = window.screen.orientation;
-var windowWidth = window.innerWidth;
-var windowHeight = window.innerHeight;
-var header = window.document.querySelector("header");
+window.addEventListener("load", function() {
+  var header = select("header");
+  function clearPage() {
+    select(".client").style.display = "none"
+    select(".portfolio").style.display = "none"
+    select(".entertainment").style.display = "none"
+  }
 
-function func() {
-  if (orientation == 90) {
-    header.style.justifyContent = "end";
-  } 
+  var online;
+  if (window.location.host === "minecraftcrup.github.io"){
+  online = true;
+  }
   else {
-    if (windowWidth <= 540) {
+  online = false; 
+  }
+
+  function setVisuals() {
+    if (windowWidth <= 560) {
+      // Header
       header.style.gap = "0px";
       header.style.justifyContent = "space-evenly";
+      // Contact Box
+      showContactBox("mobile");
+      contactBox.style.left = [(windowWidth - contactBox.offsetWidth)/2, "px"].join("");
+      contactBox.style.display = "none";
+      showUp.style.display = "flex";
     }
-    if (windowWidth >= 540) {
-      header.style.gap = "80px";
-      header.style.justifyContent = "center";
-      showContactBox();
+    if (windowWidth > 560) {
+        contactBox.removeAttribute("style");
+        contactBox.style.right = "15px";
+      if (windowWidth > windowHeight) {
+        // Contact Box
+        showContactBox("desktop");
+        header.style.justifyContent = "end";
+        contactBox.querySelector(".hide-contact-box-right").style.display = "flex";
+        contactBox.querySelector(".hide-contact-box-down").style.display = "none";
+      }
+      else {
+        header.style.gap = "80px";
+        header.style.justifyContent = "center";
+      }
     }
   }
-  if (windowWidth <= 670) {
-    contactBox.style.right = "0px";
-    contactBox.style.left = [(windowWidth - 290)/2, "px"].join("");
-  }
-}
 
-
-func();
+var windowWidth = window.innerWidth;
+var windowHeight = window.innerHeight;
 window.addEventListener("resize", function() {
   windowWidth = window.innerWidth;
-  windowHeight = window.innerHeight; 
- func()
+  windowHeight = window.innerHeight;
+  setVisuals();
 });
-// Contact Box
-var hideRight = window.document.querySelector(".hide-contact-box-right");
-var hideDown = window.document.querySelector(".hide-contact-box-down");
-var showUp = window.document.querySelector(".show-contact-box-up");
-var mainContactBox = window.document.querySelector(".main-contact-box");
-var hideContactBox;
 
-function showContactBox() {
+// On Start
+  var contactBox = select(".contact-box");
+  var hideRight = select(".hide-contact-box-right");
+  var hideDown = select(".hide-contact-box-down");
+  var showUp = select(".show-contact-box-up");
+  var mainContactBox = select(".main-contact-box");
+  var contactBoxHidden = false;
+
+  setVisuals();
+// Contact Box
+  function showContactBox(device) {
   contactBox.style.display = "block";
   showUp.style.display = "none";
+  contactBoxHidden = false;
+  if (device == "mobile") {
+    hideRight.style.display = "none";
+    hideDown.style.display = "flex";
+  }
+  if (device == "desktop") {
+    hideDown.style.display = "none";
+    hideRight.style.display = "flex";
+  }
+  function hideContactBox(device) {
+
+  }
 }
-hideRight.addEventListener("click", function hideContactBoxRight() {
-  if (hideContactBox === true) {
-    hideContactBox = false;
+  hideRight.addEventListener("click", function hideContactBoxRight() {
+  if (contactBoxHidden === true) {
+    contactBoxHidden = false;
     contactBox.style.right = "15px";    
     mainContactBox.style.display = "block";
   }
   else {
-    hideContactBox = true;
+    contactBoxHidden = true;
     contactBox.style.right = "10px";
     mainContactBox.style.display = "none";
   }
-})
-hideDown.addEventListener("click", function hideContactBoxDown() {
-  if (hideContactBox === true) {
-    hideContactBox = false;;
-    ContactBox.style.display = "block";
-    showUp.style.display = "none";
-  }
-  else {
-    hideContactBox = true;
-    contactBox.style.right = "10px";
-    contactBox.style.display = "none";
-    showUp.style.display = "flex";
-  }
-})
-showUp.addEventListener("click", function showContactBoxUp() {
-  if (hideContactBox === true) {
-    hideContactBox = false;
+  })  
+  hideDown.addEventListener("click", function hideContactBoxDown() {
+  contactBoxHidden = true;
+  contactBox.style.display = "none";
+  showUp.style.display = "flex";
+  })
+  showUp.addEventListener("click", function showContactBoxUp() {
+    contactBoxHidden = false;
     contactBox.style.display = "block";
     showUp.style.display = "none";
-  }
-});
 
-var yr = 2026; // This is the year that is featured first.
-const goodyrs = [2026,];
+  });
 
-function checkbtn() {
-  if (goodyrs.indexOf(yr) == 0) { // w/ other words if it the last or first item
-    Backward.setAttribute("disabled","");
-  } else {
-    Backward.removeAttribute("disabled");
-  }
-  if (goodyrs.indexOf(yr) == goodyrs.length - 1) {
-    Forward.setAttribute("disabled","");
-  } else {
-    Forward.removeAttribute("disabled");
-  }
-}
-function displayyr(hmm) {
-  if (hmm == "+") {
-    yr++; checkbtn();
-  }
-  if (hmm == "-") {
-    yr--; checkbtn();
-  }
-
-  document.getElementById("yr").innerHTML = yr;
+  // Achievments
+    // System Setup
+      var featuredYear = 2026;
+      var achievments = {
+        2026: {
+                  2: [" 😅 Made this Website...", ],
+                  videoID:"",
+                },
+        2027: {
+                  6: [" Hopefully released KNOCK OFF....", ],
+                  videoID:"",
+                },
+      }
+      var achievmentYears = Object.keys(achievments);
+      achievmentYears.forEach(function(year, index) {
+        achievmentYears[index] = +year;
+      });
+      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    // Functionalities
+      var previousYearButton = select("#←");
+      var nextYearButton = select("#→");
+      function checkbtn() {
+        if (achievmentYears.indexOf(featuredYear) == 0) { // w/ other words if it the last or first item
+          previousYearButton.setAttribute("disabled","");
+        } else {
+          previousYearButton.removeAttribute("disabled");
+        }
+        if (achievmentYears.indexOf(featuredYear) == achievmentYears.length - 1) {
+          nextYearButton.setAttribute("disabled","");
+        } else {
+          nextYearButton.removeAttribute("disabled");
+        }
+      }
+      function displayYear(action) {
+        if (action == "+") {
+          featuredYear++;
+          checkbtn();
+        }
+        if (action == "-") {
+          featuredYear--;
+          checkbtn();
+        }
+        select("#yr").innerHTML = featuredYear;
   
-  try {
-    displaymon();
-    var video = "//www.youtube.com/embed/" + stuff[yr]["videoid"] + "?fs=0&rel=0&autoplay=1&muted=1&showinfo=0";
-    document.getElementsByClassName("reel")[0].setAttribute("src", video);
-  }
-  catch (e) {};
-}
+        try {
+          displayMonth();
+          var displayedVideo = "//www.youtube.com/embed/" + achievments[featuredYear]["videoID"] + "?fs=0&rel=0&autoplay=1&muted=1&showinfo=0";
+          select("reel")[0].setAttribute("src", displayedVideo);
+        }
+        catch (e) {};
+      }
+      checkbtn();
+      displayYear();
+      previousYearButton.addEventListener("click", function forward(){
+        displayYear("-"); 
+      });
+      nextYearButton.addEventListener("click", function forward(){
+        displayYear("+");  
+      });
+      var displayedMonth = 0;
+      displayMonth();
+      function displayMonth(action) {
+        if (action == "+") {
+          displayedMonth++;
+        };
+        if (action == "-") {
+          displayedMonth--;
+        };
 
-var Backward = document.getElementById("←"); // That is the ← button
-var Forward = document.getElementById("→"); // the → button
-
-checkbtn(); displayyr();
-Backward.addEventListener("click", function forward(){
-  displayyr("-"); 
-});
-Forward.addEventListener("click", function forward(){
-  displayyr("+");  
-});
-
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-const stuff = {
-  2026:{
-    1:[" 😅 Made this Website...", ],
-    videoid:"",
-  },
-}
-
-var shownmon = 0;
-
-displaymon();
-function displaymon(hmm) {
-  if (hmm == "+") {
-    shownmon++;
-  };
-  if (hmm == "-") {
-    shownmon--;
-  };
-
-  document.getElementById("mo").innerHTML = months[Object.keys(stuff[yr])[shownmon]];
+        select("#mo").innerHTML = months[Object.keys(achievments[featuredYear])[displayedMonth] - 1];
   
-  { //
-  let input = '<ul class="achv">';
-  for (let c = 0; c < Object.values(stuff[yr])[shownmon].length; c++) {
-    input +=
-      '<li>' + Object.values(stuff[yr])[shownmon][c] + '</li>';
-  };
-  input += '</ul>'
-  document.getElementsByClassName("yrtroph")[0].innerHTML = input;
-  console.log(input)
-  }
-}
+        let achievmentList = '<ul class="achv">';
+        for (let c = 0; c < Object.values(achievments[featuredYear])[displayedMonth].length; c++) {
+          achievmentList +=
+          '<li>' + Object.values(achievments[featuredYear])[displayedMonth][c] + '</li>';
+        };
+        achievmentList += '</ul>'
+        select(".achievmentListContainer").innerHTML = achievmentList;
+      }
+    var Backward2 = select("#←2");
+    var Forward2 = select("#→2");
+    checkbtn2();
+    function checkbtn2 (){
+      if (displayedMonth == 0) {
+        Backward2.setAttribute("disabled","");
+      } else {
+        Backward2.removeAttribute("disabled");
+      };
+      if (displayedMonth == Object.keys(achievments[featuredYear]).length - 2) {
+        Forward2.setAttribute("disabled","")
+      } else {
+        Forward2.removeAttribute("disabled")
+      };
+    }
+  Forward2.addEventListener("click", function (){
+  displayMonth("+"); checkbtn2();
+  });
+  Backward2.addEventListener("click", function (){
+  displayMonth("-"); checkbtn2();
+  });
 
-var Backward2 = document.getElementById("←2");
-var Forward2 = document.getElementById("→2");
-
-checkbtn2();
-function checkbtn2 (){
-  if (shownmon == 0) {
-    Backward2.setAttribute("disabled","");
-  } else {
-    Backward2.removeAttribute("disabled");
-  };
-  if (shownmon == Object.keys(stuff[yr]).length - 2) {
-    Forward2.setAttribute("disabled","")
-  } else {
-    Forward2.removeAttribute("disabled")
-  };
-}
-
-Forward2.addEventListener("click", function (){
-  displaymon("+"); checkbtn2();
-});
-Backward2.addEventListener("click", function (){
-  displaymon("-"); checkbtn2();
-});
+  var achievmentsHeaderButton = document.getElementById("portfolio");
+  achievmentsHeaderButton.addEventListener("click", function showPortfolio(){
+    clearThePage();
+    select("#portfolio")[0].style.display = "block"
+  })
 
 // Client Page
-var client = document.getElementById("client");
-if (onGitHub === false) {
+  var client = document.getElementById("client");
+  if (online === false) {
   client.addEventListener("click", function showClient(){
-    clearPage();
-    document.getElementsByClassName("client")[0].style.display = "block"
+    clearThePage();
+    select(".client")[0].style.display = "block"
   })
-}
+  }
 
 // Entertaintment Page
-var entertainment = document.getElementById("entertainment");
-
-if (onGitHub === false) {
+  var entertainment = document.getElementById("entertainment");
+  if (online === false) {
   entertainment.addEventListener("click", function showEntertainment(){
-    clearPage();
+    clearThePage();
   
     // Display the Entertainment Section
     document.getElementsByTagName("body")[0].style.paddingInline = 0;
     document.getElementsByClassName("entertainment")[0].style.display = "block";
     window.document.querySelector("");
   })
-}
-
-var movie_box = {
+  }
+  var movie_box = {
   "Crup's Adventure": {
     "title":"Crup's Adventure",
     "description":"The story of a lazy Mineacraft Boy becoming a man.",
@@ -244,28 +264,29 @@ var movie_box = {
     "créme":false,
     "priority": 3,
     },
-}
-
-displayFeaturedFilms();
-function displayFeaturedFilms() {
-  var current_priority; current_priority = 1;
-  var movies; movies = Object.keys(movie_box);
+  }
+  displayFeaturedFilms();
+  function displayFeaturedFilms() {
+    var current_priority; current_priority = 1;
+    var movies; movies = Object.keys(movie_box);
   
-  current_priority = 1;
-  while (current_priority < (movies["length"] + 1)) {
-    movies.forEach(check);
-    current_priority ++;
-  }
+    current_priority = 1;
+    while (current_priority < (movies["length"] + 1)) {
+      movies.forEach(check);
+      current_priority ++;
+    }
 
-  function check (movie) {
-    console.log(movie_box[movie]["priority"]);
-    if (movie_box[movie]["priority"] === current_priority) {
-      var movie_clickable;
-      movie_clickable = 
-      "<div>" +
-        `<img class="movie-clickable btn" title="` + movie_box[movie]["title"] + `" src="images/ + movie_box[movie]["thumbnail"] + ">` +
-      "<div>";
-      document.getElementsByClassName("listofshows")[0].innerHTML += movie_clickable;
-    };
+    function check (movie) {
+      if (movie_box[movie]["priority"] === current_priority) {
+        var movie_clickable;
+        movie_clickable =  
+        "<div>" +
+          `<img class="movie-clickable btn" title="` + movie_box[movie]["title"] + `" src="images/` + movie_box[movie]["thumbnail"] + `">` +
+        "<div>";
+        document.getElementsByClassName("listofshows")[0].innerHTML += movie_clickable;
+      };
+    }
   }
-}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+});
