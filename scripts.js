@@ -1,7 +1,36 @@
 function select(element) {
   return document.querySelector(element);
 }
+
+getOS();
+function getOS() {
+  var userAgent = window.navigator.userAgent;
+  var platform = window.navigator.platform;
+  var os = "Unknown";
+
+  if (platform.indexOf('Win') !== -1) os = "Windows";
+  else if (platform.indexOf('Mac') !== -1) os = "MacOS";
+  else if (platform.indexOf('Linux') !== -1) os = "Linux";
+  else if (/Android/.test(userAgent)) os = "Android";
+  else if (/iPhone|iPad|iPod/.test(userAgent)) os = "iOS";
+
+  console.log(os)
+  return os;
+}
+
 window.addEventListener("load", function() {
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  blurrer("hide");  
+  function blurrer(action) {
+    if (action === "hide") {
+      select(".blurrer").style.display = "none";
+    }
+    if (action === "show") {
+      select(".blurrer").style.display = "block";
+    }
+  }
+
   var header = select("header");
   function clearPage() {
     select(".client").style.display = "none"
@@ -16,30 +45,39 @@ window.addEventListener("load", function() {
   else {
   online = false; 
   }
-
+  
+  var contactBoxHidden = false
   function setVisuals() {
     if (windowWidth <= 560) {
       // Header
       header.style.gap = "0px";
       header.style.justifyContent = "space-evenly";
       // Contact Box
-      showContactBox("mobile");
       contactBox.style.left = [(windowWidth - contactBox.offsetWidth)/2, "px"].join("");
-      contactBox.style.display = "none";
-      showUp.style.display = "flex";
+      if (contactBoxHidden === true) {
+        hideContactBox("mobile")
+      }
+      if (contactBoxHidden === false) {
+        showContactBox("mobile")
+      }
     }
     if (windowWidth > 560) {
-        contactBox.removeAttribute("style");
-        contactBox.style.right = "15px";
+      // Contact Box
+      if (contactBoxHidden === true) {
+        hideContactBox("desktop")
+      }
+      if (contactBoxHidden === false) {
+        showContactBox("desktop")
+      }
+      contactBox.removeAttribute("style");
+      contactBox.style.right = "15px";
       if (windowWidth > windowHeight) {
-        // Contact Box
-        showContactBox("desktop");
+        // Header
+        header.style.gap = "40px";
         header.style.justifyContent = "end";
-        contactBox.querySelector(".hide-contact-box-right").style.display = "flex";
-        contactBox.querySelector(".hide-contact-box-down").style.display = "none";
       }
       else {
-        header.style.gap = "80px";
+        header.style.gap = "40px";
         header.style.justifyContent = "center";
       }
     }
@@ -59,48 +97,57 @@ window.addEventListener("resize", function() {
   var hideDown = select(".hide-contact-box-down");
   var showUp = select(".show-contact-box-up");
   var mainContactBox = select(".main-contact-box");
-  var contactBoxHidden = false;
 
   setVisuals();
 // Contact Box
-  function showContactBox(device) {
-  contactBox.style.display = "block";
-  showUp.style.display = "none";
-  contactBoxHidden = false;
-  if (device == "mobile") {
-    hideRight.style.display = "none";
-    hideDown.style.display = "flex";
-  }
-  if (device == "desktop") {
-    hideDown.style.display = "none";
-    hideRight.style.display = "flex";
+  
+  function showContactBox(device, special) {
+    contactBoxHidden = false;
+    showUp.style.display = "none";
+    
+    if (device == "mobile") {
+      hideRight.style.display = "none";
+      hideDown.style.display = "flex";
+      contactBox.style.display = "block";
+      }
+     if (device === "desktop") {
+        mainContactBox.style.display = "block"
+        hideRight.style.display = "flex";
+        hideDown.style.display = "none";
+      } 
   }
   function hideContactBox(device) {
-
+      contactBoxHidden = true;
+      if (device === "mobile") {
+        blurrer("hide");
+        showUp.style.display = "flex"
+        contactBox.style.display = "none"
+      }
+      if (device ==="desktop") {
+        showUp.style.display = "none"
+        mainContactBox.style.display = "none"
+        hideDown.style.display = "none";
+        hideRight.style.display = "flex";
+        hideRight.src = "images/caret-left.svg";
+      }
   }
-}
+  
   hideRight.addEventListener("click", function hideContactBoxRight() {
-  if (contactBoxHidden === true) {
-    contactBoxHidden = false;
-    contactBox.style.right = "15px";    
-    mainContactBox.style.display = "block";
-  }
-  else {
-    contactBoxHidden = true;
-    contactBox.style.right = "10px";
-    mainContactBox.style.display = "none";
-  }
+    if (contactBoxHidden === true) {
+      showContactBox("desktop");
+      hideRight.src = "images/caret-right.svg";
+    } 
+    else {
+      hideContactBox("desktop");
+      hideRight.src = "images/caret-left.svg";
+    }
   })  
   hideDown.addEventListener("click", function hideContactBoxDown() {
-  contactBoxHidden = true;
-  contactBox.style.display = "none";
-  showUp.style.display = "flex";
+    hideContactBox("mobile");
   })
   showUp.addEventListener("click", function showContactBoxUp() {
-    contactBoxHidden = false;
-    contactBox.style.display = "block";
-    showUp.style.display = "none";
-
+    showContactBox("mobile");
+    setVisuals();
   });
 
   // Achievments
@@ -108,11 +155,7 @@ window.addEventListener("resize", function() {
       var featuredYear = 2026;
       var achievments = {
         2026: {
-                  2: [" 😅 Made this Website...", ],
-                  videoID:"",
-                },
-        2027: {
-                  6: [" Hopefully released KNOCK OFF....", ],
+                  2: ["Made this website", ],
                   videoID:"",
                 },
       }
@@ -120,7 +163,9 @@ window.addEventListener("resize", function() {
       achievmentYears.forEach(function(year, index) {
         achievmentYears[index] = +year;
       });
+      var displayedMonth = 0;
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+      var noVideoToDisplayMessage;
 
     // Functionalities
       var previousYearButton = select("#←");
@@ -149,27 +194,36 @@ window.addEventListener("resize", function() {
           updateYearButtons();
         }
         select("#yr").innerHTML = featuredYear;
-  
-        try {
-          displayMonth();
-          var displayedVideo = "//www.youtube.com/embed/" + achievments[featuredYear]["videoID"] + "?fs=0&rel=0&autoplay=1&muted=1&showinfo=0";
-          select("reel")[0].setAttribute("src", displayedVideo);
+        displayMonth();
+        if (achievments[featuredYear]["videoID"] == "") {
+          noVideoToDisplayMessage = `<div style="color: white; text-align: center">There is no video showcase<br>for ` + featuredYear + `.</div>`;
+          select(".reel").innerHTML = noVideoToDisplayMessage;
         }
-        catch (e) {};
+        else {          
+          try {            
+            select(".reel").innerHTML = "<iframe></iframe>"
+            var displayedVideo = "//www.youtube.com/embed/" + achievments[featuredYear]["videoID"] + "?fs=0&rel=0&autoplay=1&muted=1&showinfo=0";
+            select(".reel").select(".reel").setAttribute("src", displayedVideo);
+          }
+          catch (e) {
+          };
+        }
       }
-
+        
       updateYearButtons();
       displayYear();
 
       previousYearButton.addEventListener("click", function forward(){
-        displayYear("-"); 
+        if (!(previousYearButton.hasAttribute("disabled"))) {
+          displayYear("-");
+        }
       });
 
       nextYearButton.addEventListener("click", function forward(){
-        displayYear("+");  
+        if (!(nextYearButton.hasAttribute("disabled"))) {
+          displayYear("+");
+        }
       });
-
-      var displayedMonth = 0;
 
       displayMonth();
       function displayMonth(action) {
@@ -181,8 +235,9 @@ window.addEventListener("resize", function() {
         };
 
         select("#mo").innerHTML = months[Object.keys(achievments[featuredYear])[displayedMonth] - 1];
-  
+        
         let achievmentList = '<ul class="achv">';
+        console.log(displayedMonth)
         for (let c = 0; c < Object.values(achievments[featuredYear])[displayedMonth].length; c++) {
           achievmentList +=
           '<li>' + Object.values(achievments[featuredYear])[displayedMonth][c] + '</li>';
@@ -210,10 +265,14 @@ window.addEventListener("resize", function() {
         };
       }
       nextMonthButton.addEventListener("click", function (){
-      displayMonth("+"); updateMonthButtons();
+        if (!(nextMonthButton.hasAttribute("disabled"))) {
+          displayMonth("+"); updateMonthButtons();
+        }
       });
       previousMonthButton.addEventListener("click", function (){
-      displayMonth("-"); updateMonthButtons();
+      if (!(previousMonthButton.hasAttribute("disabled"))) {
+          displayMonth("-"); updateMonthButtons();
+        }
       });
 
       var achievmentsHeaderButton = document.getElementById("portfolio");
@@ -299,6 +358,6 @@ window.addEventListener("resize", function() {
       };
     }
   }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 });

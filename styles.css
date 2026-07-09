@@ -38,17 +38,24 @@ body::-webkit-scrollbar {
 body > * {
  width: 100%;
 }
-button:hover, .btn:hover {
+.btn:hover {
  cursor: pointer;
 }
-button[disabled] {
+.btn[disabled] {
  cursor: not-allowed;
+ opacity: 0.1;
+}
+.blurrer {
+  filter: blur(5px);
+  width: 100vw; height: 100vh;
+  position: absolute; z-index: 1;
+  background-color: aliceblue;
 }
 
 /*Contact*/
 .contact-box {
-  max-width: 290px; height: auto;
-  position: fixed;
+  max-width: min-content; max-height: min-content;
+  position: fixed; z-index: 2;
   right: 10px; bottom: 15px;
 
   background: var(--color-white);
@@ -58,6 +65,7 @@ button[disabled] {
   display: flex; flex-direction: column;
 }
 .main-contact-box {
+  display: block;
   padding: 10px;
 }
 p.title {
@@ -72,21 +80,26 @@ p.title {
 }
 .hide-contact-box-right {
   justify-content: center; align-items: center;
-  width: 20px; height: 115px;
+  width: 40px; height: 115px;
   border-left: 1px solid var(--color-gray);
-  padding-inline: 5px;
+  display: flex;
 }
 .hide-contact-box-down {
+  width: 267px;
+  display: flex;
   justify-content: center; align-items: center;
   border-top: 1px solid var(--color-gray);
 }
 .show-contact-box-up {
-  width: 100%; height: 20px;
+  width: 100%; height: 50px;
   background: var(--color-white);
   border: 1px solid var(--color-gray);
   position: fixed; bottom: 0px;
   display: none;
   justify-content: center; align-items: center;
+}
+.s {
+  width: 30px;
 }
 /*Header*/
 header {
@@ -108,7 +121,7 @@ header {
 header p:hover {
  cursor: pointer; color: var(--hyperlink-color-light);
 }
-#client:hover{
+.blocked:hover{
   cursor: not-allowed;
 }
 /*Page Container*/
@@ -141,15 +154,14 @@ header p:hover {
   }
 }
 .tmln { /*TIME BTN*/
-  background: rgb(207, 207, 207);
-  width: 20px; height: 30px;
-  border: none; border-radius: 8px;
+  max-height: 30px;
 }
 
 /*Video Section*/
 .yeardisplay {
   display: flex;
   align-items: center;
+  font-weight: 600;
 }
 .yeardisplay p {
   font-size: 3rem;
@@ -158,13 +170,19 @@ header p:hover {
 .reel {
   background-color: black;
   width: 100%; aspect-ratio: 16 / 9;
-  position: relative; z-index: 0;
+  display: flex;
+  justify-content: center; align-items: center;
+}
+.reel iframe {
+  width: 100%;
+  height: 100%;
 }
 
 /*Text Section*/
 .monthdisplay {
   display: flex;
   align-items: center;
+  font-weight: 600;
 }
 .monthdisplay p {
   font-size: 2.5rem;

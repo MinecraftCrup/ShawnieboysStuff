@@ -13,12 +13,14 @@
  <title>Shawn's Stuff</title>
 </head>
 <body>
+<div class="blurrer">
+</div>
 <!--Navigation Bar-->
 <div>
  <header>
    <p id="portfolio">ACHIEVMENTS</p>
-   <p id="client">CLIENT</p>
-   <p id="entertainment">ENTERTAINMENT</p>
+   <p id="client" class="blocked" style="text-decoration: line-through; text-decoration-thickness: 3px;">CLIENT</p>
+   <p id="entertainment" class="blocked" style="text-decoration: line-through;text-decoration-thickness: 3px;">ENTERTAINMENT</p>
  </header>
  <hr style="height:2px; background-color:gray; margin-bottom: 0px; margin-top: 0px;">
 </div>
@@ -26,26 +28,27 @@
 <div class="pages">
  <div class="portfolio">
   <p class="portfoliopage-aboutme">
-    Hi. My name is Shawn and I am on my way to become a super sigma super guy! 🤩.
-    Below you can see my some of the things I've acheived over the years.
-    You can use the arrows to navigate to the year or month you want to veiw.
+    My name is Shawn and I am on my way to become <span style="font-style: italic;">Jack of all trades, master of all</span>.<br>
+    <br>
+    On this page you can see my one of my greatest achievments this year.
   </p>
   <div class="portfoliosec">
    <!--1-->
    <div>
     <div class="yeardisplay">
-     <button id="←" class="tmln">←<img src=""></button>
-     <p id="yr"></p> <!--The Year Numeral-->
-     <button id="→" class="tmln">→<img src=""></button>
+     <img id="←" class="tmln btn" src="images/caret-left.svg">
+     <p id="yr"></p>
+     <img id="→" class="tmln btn" src="images/caret-right.svg">
     </div>
-    <iframe class="reel"></iframe>
+    <div class="reel">
+    </div>
    </div>
    <!--2-->
    <div>
     <div class="monthdisplay">
-     <button id="←2" class="tmln">←<img src=""></button>
+     <img id="←2" class="tmln btn" src="images/caret-left.svg">
      <p id="mo"></p> <!--The Year Numeral-->
-     <button id="→2" class="tmln">→<img src=""></button>
+     <img id="→2" class="tmln btn" src="images/caret-right.svg">
      </div>
      <div class="achievmentListContainer" style="height: 100px">
      </div>
@@ -82,17 +85,17 @@
         <br><span style="user-select:text">minecraftcrup@outlook.com</span>.
       </p>
     </div>
-    <div class="hide-contact-box-right btn" title="Hide Contact Box">
-      <img src="images/">
-    </div>
+      <img title="Hide Contact Box" class="hide-contact-box-right btn" src="images/caret-right.svg" class="s">
   </div>
   <div class="hide-contact-box-down btn" title="Hide Contact Box">
-    <img src="images/"> Hide 
+    <img src="images/caret-down.svg" class="s"> Hide 
   </div>
 </div>
-<div class="show-contact-box-up btn">
-  <img src="images/up_arrow"> Contact
+<div class="show-contact-box-up btn"  style="font-weight: bold;">
+  <img src="images/caret-up.svg" class="s">
+  <p>Contact</p>
 </div>
+<p>Uicons by <a href="https://www.flaticon.com/uicons">Flaticon</a></p>
 <!--JavaScript-->
 <script src="scripts.js"></script>
 </body>
