@@ -46,16 +46,16 @@ body > * {
  opacity: 0.1;
 }
 .blurrer {
-  filter: blur(5px);
+  backdrop-filter: blur(5px);
+  background: rgb(128, 128, 128, 0.5);
   width: 100vw; height: 100vh;
-  position: absolute; z-index: 1;
-  background-color: aliceblue;
+  position: absolute; z-index: 5;
 }
 
 /*Contact*/
 .contact-box {
   max-width: min-content; max-height: min-content;
-  position: fixed; z-index: 2;
+  position: fixed; z-index: 12;
   right: 10px; bottom: 15px;
 
   background: var(--color-white);
@@ -104,10 +104,12 @@ p.title {
 /*Header*/
 header {
  display: flex;
+ position: fixed; z-index: 1;
+ width: 100%;
  padding: 15px 0px;
  font-variant: small-caps;
  font-weight: 700;
- background: var(--color-white2);
+ background: var(--color-white);
  box-shadow: 0px 0.1px 10px rgb(0, 0, 0);
 }
 @media (orientation: landscape) {
@@ -135,7 +137,7 @@ header p:hover {
 	font-family: var(--main-font);
 	font-size: 1.2rem;
 	margin-bottom: 30px;
-  margin-top: 40px
+  margin-top: 60px
 }
 .portfolio {
   padding: 0 30px;

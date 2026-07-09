@@ -106,6 +106,7 @@ window.addEventListener("resize", function() {
     showUp.style.display = "none";
     
     if (device == "mobile") {
+      blurrer("show");
       hideRight.style.display = "none";
       hideDown.style.display = "flex";
       contactBox.style.display = "block";
