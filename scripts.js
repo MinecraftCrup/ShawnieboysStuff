@@ -46,7 +46,7 @@ window.addEventListener("load", function() {
   online = false; 
   }
   
-  var contactBoxHidden = false
+  var contactBoxHidden = true
   function setVisuals() {
     if (windowWidth <= 560) {
       // Header
