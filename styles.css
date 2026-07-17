@@ -56,7 +56,7 @@ body > * {
 .contact-box {
   max-width: min-content; max-height: min-content;
   position: fixed; z-index: 12;
-  right: 10px; bottom: 15px;
+  right: 10px; bottom: 60px;
 
   background: var(--color-white);
   border: 1px solid var(--color-gray);
@@ -137,7 +137,7 @@ header p:hover {
 	font-family: var(--main-font);
 	font-size: 1.2rem;
 	margin-bottom: 30px;
-  margin-top: 60px
+  margin-top: 80px
 }
 .portfolio {
   padding: 0 30px;

@@ -46,7 +46,8 @@ window.addEventListener("load", function() {
   online = false; 
   }
   
-  var contactBoxHidden = true
+  var contactBoxHiddenOnMobile = true
+  var contactBoxHiddenOnDesktop = false
   function setVisuals() {
     if (windowWidth <= 560) {
       // Header
@@ -54,19 +55,19 @@ window.addEventListener("load", function() {
       header.style.justifyContent = "space-evenly";
       // Contact Box
       contactBox.style.left = [(windowWidth - contactBox.offsetWidth)/2, "px"].join("");
-      if (contactBoxHidden === true) {
+      if (contactBoxHiddenOnMobile === true) {
         hideContactBox("mobile")
       }
-      if (contactBoxHidden === false) {
+      if (contactBoxHiddenOnMobile === false) {
         showContactBox("mobile")
       }
     }
     if (windowWidth > 560) {
       // Contact Box
-      if (contactBoxHidden === true) {
+      if (contactBoxHiddenOnDesktop === true) {
         hideContactBox("desktop")
       }
-      if (contactBoxHidden === false) {
+      if (contactBoxHiddenOnDesktop === false) {
         showContactBox("desktop")
       }
       contactBox.removeAttribute("style");
@@ -102,23 +103,27 @@ window.addEventListener("resize", function() {
 // Contact Box
   
   function showContactBox(device, special) {
-    contactBoxHidden = false;
+    contactBoxHiddenOnDesktop = false;
+    contactBoxHiddenOnMobile = false;
     showUp.style.display = "none";
     
     if (device == "mobile") {
       blurrer("show");
       hideRight.style.display = "none";
       hideDown.style.display = "flex";
-      contactBox.style.display = "block";
+      mainContactBox.style.display = "block";
+      contactBox.style.display = "block"
       }
      if (device === "desktop") {
+        blurrer("hide");
         mainContactBox.style.display = "block"
         hideRight.style.display = "flex";
         hideDown.style.display = "none";
       } 
   }
   function hideContactBox(device) {
-      contactBoxHidden = true;
+      contactBoxHiddenOnMobile = true;
+      contactBoxHiddenOnDesktop = true;
       if (device === "mobile") {
         blurrer("hide");
         showUp.style.display = "flex"
@@ -134,7 +139,7 @@ window.addEventListener("resize", function() {
   }
   
   hideRight.addEventListener("click", function hideContactBoxRight() {
-    if (contactBoxHidden === true) {
+    if (contactBoxHiddenOnDesktop === true) {
       showContactBox("desktop");
       hideRight.src = "images/caret-right.svg";
     } 
