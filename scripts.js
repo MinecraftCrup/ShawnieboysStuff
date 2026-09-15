@@ -113,12 +113,14 @@ window.addEventListener("resize", function() {
       hideDown.style.display = "flex";
       mainContactBox.style.display = "block";
       contactBox.style.display = "block"
+      contactBox.style.bottom = "60px";
       }
      if (device === "desktop") {
         blurrer("hide");
         mainContactBox.style.display = "block"
         hideRight.style.display = "flex";
         hideDown.style.display = "none";
+        contactBox.style.bottom = "15px";
       } 
   }
   function hideContactBox(device) {
