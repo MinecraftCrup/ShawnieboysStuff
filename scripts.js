@@ -53,6 +53,7 @@ window.addEventListener("load", function() {
       // Header
       header.style.gap = "0px";
       header.style.justifyContent = "space-evenly";
+      select("#research").style.display = "none";
       // Contact Box
       contactBox.style.left = [(windowWidth - contactBox.offsetWidth)/2, "px"].join("");
       if (contactBoxHiddenOnMobile === true) {
@@ -72,6 +73,7 @@ window.addEventListener("load", function() {
       }
       contactBox.removeAttribute("style");
       contactBox.style.right = "15px";
+      select("#research").style.display = "block";
       if (windowWidth > windowHeight) {
         // Header
         header.style.gap = "40px";
