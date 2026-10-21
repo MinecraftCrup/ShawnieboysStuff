@@ -46,31 +46,34 @@ window.addEventListener("load", function() {
   online = false; 
   }
   
-  var contactBoxHidden = false
+  var contactBoxHiddenOnMobile = true
+  var contactBoxHiddenOnDesktop = false
   function setVisuals() {
     if (windowWidth <= 560) {
       // Header
       header.style.gap = "0px";
       header.style.justifyContent = "space-evenly";
+      select("#research").style.display = "none";
       // Contact Box
       contactBox.style.left = [(windowWidth - contactBox.offsetWidth)/2, "px"].join("");
-      if (contactBoxHidden === true) {
+      if (contactBoxHiddenOnMobile === true) {
         hideContactBox("mobile")
       }
-      if (contactBoxHidden === false) {
+      if (contactBoxHiddenOnMobile === false) {
         showContactBox("mobile")
       }
     }
     if (windowWidth > 560) {
       // Contact Box
-      if (contactBoxHidden === true) {
+      if (contactBoxHiddenOnDesktop === true) {
         hideContactBox("desktop")
       }
-      if (contactBoxHidden === false) {
+      if (contactBoxHiddenOnDesktop === false) {
         showContactBox("desktop")
       }
       contactBox.removeAttribute("style");
       contactBox.style.right = "15px";
+      select("#research").style.display = "block";
       if (windowWidth > windowHeight) {
         // Header
         header.style.gap = "40px";
@@ -102,22 +105,29 @@ window.addEventListener("resize", function() {
 // Contact Box
   
   function showContactBox(device, special) {
-    contactBoxHidden = false;
+    contactBoxHiddenOnDesktop = false;
+    contactBoxHiddenOnMobile = false;
     showUp.style.display = "none";
     
     if (device == "mobile") {
+      blurrer("show");
       hideRight.style.display = "none";
       hideDown.style.display = "flex";
-      contactBox.style.display = "block";
+      mainContactBox.style.display = "block";
+      contactBox.style.display = "block"
+      contactBox.style.bottom = "60px";
       }
      if (device === "desktop") {
+        blurrer("hide");
         mainContactBox.style.display = "block"
         hideRight.style.display = "flex";
         hideDown.style.display = "none";
+        contactBox.style.bottom = "15px";
       } 
   }
   function hideContactBox(device) {
-      contactBoxHidden = true;
+      contactBoxHiddenOnMobile = true;
+      contactBoxHiddenOnDesktop = true;
       if (device === "mobile") {
         blurrer("hide");
         showUp.style.display = "flex"
@@ -128,18 +138,18 @@ window.addEventListener("resize", function() {
         mainContactBox.style.display = "none"
         hideDown.style.display = "none";
         hideRight.style.display = "flex";
-        hideRight.src = "images/caret-left.svg";
+        hideRight.src = "Pictures/caret-left.svg";
       }
   }
   
   hideRight.addEventListener("click", function hideContactBoxRight() {
-    if (contactBoxHidden === true) {
+    if (contactBoxHiddenOnDesktop === true) {
       showContactBox("desktop");
-      hideRight.src = "images/caret-right.svg";
+      hideRight.src = "Pictures/caret-right.svg";
     } 
     else {
       hideContactBox("desktop");
-      hideRight.src = "images/caret-left.svg";
+      hideRight.src = "Pictures/caret-left.svg";
     }
   })  
   hideDown.addEventListener("click", function hideContactBoxDown() {
@@ -290,6 +300,12 @@ window.addEventListener("resize", function() {
   })
   }
 
+// Documents
+  var research = document.getElementById("research");
+  research.addEventListener("click", function showResearch(){
+    window.open("Documents/", '_blank');
+  })
+
 // Entertaintment Page
   var entertainment = document.getElementById("entertainment");
   if (online === false) {
@@ -352,7 +368,7 @@ window.addEventListener("resize", function() {
         var movie_clickable;
         movie_clickable =  
         "<div>" +
-          `<img class="movie-clickable btn" title="` + movie_box[movie]["title"] + `" src="images/` + movie_box[movie]["thumbnail"] + `">` +
+          `<img class="movie-clickable btn" title="` + movie_box[movie]["title"] + `" src="Pictures/` + movie_box[movie]["thumbnail"] + `">` +
         "<div>";
         document.getElementsByClassName("listofshows")[0].innerHTML += movie_clickable;
       };
