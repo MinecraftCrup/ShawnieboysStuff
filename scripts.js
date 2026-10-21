@@ -302,9 +302,11 @@ window.addEventListener("resize", function() {
 
 // Documents
   var research = document.getElementById("research");
-  research.addEventListener("click", function showResearch(){
-    window.open("Documents/", '_blank');
-  })
+  if (online === false) {
+    research.addEventListener("click", function showResearch(){
+      window.open("Documents/", '_blank');
+    })
+  }
 
 // Entertaintment Page
   var entertainment = document.getElementById("entertainment");
